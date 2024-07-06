@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experiência Única</title>
+    <title>Dynamic Fibonacci Math Art Generator</title>
     <style>
         body {
             display: flex;
@@ -12,74 +12,60 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            transition: background-color 1s ease;
-            background-color: #f0f0f0; /* Cor de fundo inicial */
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
         }
         button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
             background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
-        .circle {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: rgba(255, 0, 0, 0.5);
-            pointer-events: none; /* Evita que o elemento interfira com cliques */
-            animation: pulse 1s infinite alternate;
-        }
-
-        @keyframes pulse {
-            to {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
-    <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
+    <canvas id="artCanvas" width="800" height="600"></canvas>
+    <button onclick="gerarObraDeArte()">Gerar Nova Obra de Arte</button>
 
     <script>
-        function gerarExperienciaUnica() {
-            // Gerar cor aleatória para o fundo
-            var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-            document.body.style.backgroundColor = randomColor;
+        // Função para gerar uma obra de arte com base em Fibonacci
+        function gerarObraDeArte() {
+            var canvas = document.getElementById('artCanvas');
+            var ctx = canvas.getContext('2d');
 
-            // Gerar elementos visuais aleatórios
-            var numElements = Math.floor(Math.random() * 5) + 3; // Entre 3 e 7 elementos
-            for (var i = 0; i < numElements; i++) {
-                criarElementoVisualAleatorio();
+            // Limpar o canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Lógica para desenhar a obra de arte usando Fibonacci
+            var fib = [1, 1];
+            var maxSize = Math.min(canvas.width, canvas.height) * 0.8;
+
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height / 2);
+
+            for (var i = 0; i < 200; i++) {
+                var next = fib[0] + fib[1];
+                var angle = i * Math.PI / 180 * 137.5; // Espiral de Fibonacci
+
+                var x = canvas.width / 2 + Math.cos(angle) * next * 2;
+                var y = canvas.height / 2 + Math.sin(angle) * next * 2;
+
+                ctx.lineTo(x, y);
+
+                fib[0] = fib[1];
+                fib[1] = next;
             }
-        }
 
-        function criarElementoVisualAleatorio() {
-            var colors = ['#ff6347', '#ff69b4', '#00ced1', '#9370db', '#ffa500'];
-            var randomColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            var size = Math.random() * 100 + 20; // Tamanho entre 20px e 120px
-            var posX = Math.random() * (window.innerWidth - size) + 'px';
-            var posY = Math.random() * (window.innerHeight - size) + 'px';
-
-            var element = document.createElement('div');
-            element.className = 'circle';
-            element.style.backgroundColor = randomColor;
-            element.style.left = posX;
-            element.style.top = posY;
-
-            document.body.appendChild(element);
-
-            setTimeout(function() {
-                element.remove();
-            }, 2500); // Remover elemento após a animação completa
+            ctx.strokeStyle = '#000';
+            ctx.stroke();
         }
     </script>
 </body>

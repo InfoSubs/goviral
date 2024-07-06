@@ -3,110 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nome do Projeto</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Site Viral - Experiência Única</title>
     <style>
-        /* Estilos adicionais podem ser inseridos diretamente aqui */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        nav ul li {
-            margin-right: 20px;
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        main {
-            padding: 20px;
-        }
-        section {
-            margin-bottom: 30px;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #333;
-            color: #fff;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Nome do Projeto</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#services">Serviços</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="home">
-            <h2>Bem-vindo ao Nome do Projeto</h2>
-            <p>Esta é a página inicial do seu site.</p>
-        </section>
-        
-        <section id="about">
-            <h2>Sobre</h2>
-            <p>Algumas informações sobre o seu projeto.</p>
-        </section>
-        
-        <section id="services">
-            <h2>Serviços</h2>
-            <ul>
-                <li>Serviço 1</li>
-                <li>Serviço 2</li>
-                <li>Serviço 3</li>
-            </ul>
-        </section>
-        
-        <section id="contact">
-            <h2>Contato</h2>
-            <form action="#">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required><br><br>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
-                
-                <label for="message">Mensagem:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br><br>
-                
-                <button type="submit">Enviar</button>
-            </form>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 Nome do Projeto. Todos os direitos reservados.</p>
-    </footer>
-    
-    <script src="js/main.js"></script>
+    <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
+
+    <script>
+        function gerarExperienciaUnica() {
+            // Array de URLs para páginas diferentes
+            var urls = [
+                'pagina1.html',
+                'pagina2.html',
+                'pagina3.html'
+            ];
+
+            // Escolher aleatoriamente uma URL do array
+            var randomIndex = Math.floor(Math.random() * urls.length);
+            var randomUrl = urls[randomIndex];
+
+            // Redirecionar o usuário para a página aleatória
+            window.location.href = randomUrl;
+        }
+    </script>
 </body>
 </html>

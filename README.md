@@ -32,6 +32,5 @@ Este projeto é uma plataforma web inovadora projetada para oferecer uma experi�
 Este projeto é licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT). Veja o arquivo `LICENSE` para mais detalhes.
 
 ## Contato
-- Autor: [Seu Nome](https://github.com/seu-usuario)
-- Email: seu-email@example.com
-- Site: https://seu-site.com
+- Autor: [InfoSubs](https://github.com/InfoSubs/goviral.git)
+- Email: admin@infosubs.com

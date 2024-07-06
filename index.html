@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
         }
         button {
             padding: 15px 30px;
@@ -24,26 +26,53 @@
         button:hover {
             background-color: #0056b3;
         }
+        .unique-experience {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
     <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
 
+    <div class="unique-experience" id="uniqueExperience">
+        <!-- Conteúdo da experiência única -->
+        <h2>Experiência Única</h2>
+        <p>Conteúdo personalizado para você!</p>
+        <button onclick="fecharExperiencia()">Fechar</button>
+    </div>
+
     <script>
         function gerarExperienciaUnica() {
-            // Array de URLs para páginas diferentes
-            var urls = [
-                'pagina1.html',
-                'pagina2.html',
-                'pagina3.html'
-            ];
+            var uniqueExperience = document.getElementById('uniqueExperience');
+            var randomColor = getRandomColor();
+            
+            // Personalização da experiência única
+            uniqueExperience.style.backgroundColor = randomColor;
+            uniqueExperience.style.display = 'block';
+        }
 
-            // Escolher aleatoriamente uma URL do array
-            var randomIndex = Math.floor(Math.random() * urls.length);
-            var randomUrl = urls[randomIndex];
+        function fecharExperiencia() {
+            var uniqueExperience = document.getElementById('uniqueExperience');
+            uniqueExperience.style.display = 'none';
+        }
 
-            // Redirecionar o usuário para a página aleatória
-            window.location.href = randomUrl;
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
     </script>
 </body>

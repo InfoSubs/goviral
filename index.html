@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +21,14 @@
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
         .unique-experience {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -38,10 +38,43 @@
             border-radius: 8px;
             text-align: center;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .unique-experience.show {
+            opacity: 1;
+        }
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .animation-element {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            opacity: 0;
+            animation: animateBackground 2s linear forwards;
+        }
+        @keyframes animateBackground {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="animation-container">
+        <div class="animation-element"></div>
+    </div>
+
     <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
 
     <div class="unique-experience" id="uniqueExperience">
@@ -54,25 +87,18 @@
     <script>
         function gerarExperienciaUnica() {
             var uniqueExperience = document.getElementById('uniqueExperience');
-            var randomColor = getRandomColor();
+            var animationElement = document.querySelector('.animation-element');
             
-            // Personalização da experiência única
-            uniqueExperience.style.backgroundColor = randomColor;
-            uniqueExperience.style.display = 'block';
+            animationElement.style.display = 'block';
+            setTimeout(function() {
+                animationElement.style.display = 'none';
+                uniqueExperience.classList.add('show');
+            }, 2000);
         }
 
         function fecharExperiencia() {
             var uniqueExperience = document.getElementById('uniqueExperience');
-            uniqueExperience.style.display = 'none';
-        }
-
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
+            uniqueExperience.classList.remove('show');
         }
     </script>
 </body>

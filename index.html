@@ -21,14 +21,13 @@
             color: white;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
         .unique-experience {
             display: none;
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -38,67 +37,58 @@
             border-radius: 8px;
             text-align: center;
             z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
-        .unique-experience.show {
-            opacity: 1;
-        }
-        .animation-container {
+        .video-container {
             position: relative;
             width: 100%;
-            height: 100%;
+            padding-top: 56.25%; /* Proporção de aspecto 16:9 para o vídeo */
             overflow: hidden;
+            background-color: #000;
+            margin-top: 20px;
         }
-        .animation-element {
+        .video-container iframe {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #007bff, #0056b3);
-            opacity: 0;
-            animation: animateBackground 2s linear forwards;
-        }
-        @keyframes animateBackground {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
     </style>
 </head>
 <body>
-    <div class="animation-container">
-        <div class="animation-element"></div>
-    </div>
-
     <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
 
     <div class="unique-experience" id="uniqueExperience">
         <!-- Conteúdo da experiência única -->
         <h2>Experiência Única</h2>
-        <p>Conteúdo personalizado para você!</p>
+        <div class="video-container" id="videoContainer">
+            <!-- Vídeo aleatório -->
+        </div>
         <button onclick="fecharExperiencia()">Fechar</button>
     </div>
 
     <script>
         function gerarExperienciaUnica() {
             var uniqueExperience = document.getElementById('uniqueExperience');
-            var animationElement = document.querySelector('.animation-element');
+            var videoContainer = document.getElementById('videoContainer');
+            var videos = [
+                'https://www.youtube.com/embed/VIDEO_ID1?autoplay=1',
+                'https://www.youtube.com/embed/VIDEO_ID2?autoplay=1',
+                'https://www.youtube.com/embed/VIDEO_ID3?autoplay=1'
+                // Adicione mais URLs de vídeos aqui
+            ];
+            var randomVideo = videos[Math.floor(Math.random() * videos.length)];
             
-            animationElement.style.display = 'block';
-            setTimeout(function() {
-                animationElement.style.display = 'none';
-                uniqueExperience.classList.add('show');
-            }, 2000);
+            // Personalização da experiência única
+            videoContainer.innerHTML = '<iframe src="' + randomVideo + '" frameborder="0" allowfullscreen></iframe>';
+            uniqueExperience.style.display = 'block';
         }
 
         function fecharExperiencia() {
             var uniqueExperience = document.getElementById('uniqueExperience');
-            uniqueExperience.classList.remove('show');
+            var videoContainer = document.getElementById('videoContainer');
+            videoContainer.innerHTML = ''; // Limpar o conteúdo do vídeo ao fechar
+            uniqueExperience.style.display = 'none';
         }
     </script>
 </body>

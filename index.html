@@ -21,47 +21,51 @@
 </head>
 <body>
     <h1>Fractal Fibonacci Art Generator</h1>
-    <canvas id="artCanvas" width="800" height="600"></canvas>
+    <canvas id="artCanvas"></canvas>
 
     <script>
-        // Lógica para gerar arte abstrata
         var canvas = document.getElementById('artCanvas');
         var ctx = canvas.getContext('2d');
 
         function generateArt() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Configurações iniciais
-            var numShapes = 50;
-            var maxSize = 100;
-            var minSize = 20;
+            var maxSize = 200;
+            var minSize = 5;
+            var maxDepth = 8;
+            var startColor = [255, 50, 50]; // Red
 
-            for (var i = 0; i < numShapes; i++) {
-                // Cores aleatórias
-                var red = Math.floor(Math.random() * 256);
-                var green = Math.floor(Math.random() * 256);
-                var blue = Math.floor(Math.random() * 256);
-                ctx.fillStyle = `rgb(${red},${green},${blue})`;
+            drawShape(canvas.width / 2, canvas.height / 2, maxSize, maxDepth, startColor);
+        }
 
-                // Posições aleatórias
-                var x = Math.random() * canvas.width;
-                var y = Math.random() * canvas.height;
+        function drawShape(x, y, size, depth, color) {
+            if (depth <= 0) return;
 
-                // Tamanhos aleatórios
-                var size = Math.random() * (maxSize - minSize) + minSize;
+            ctx.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fill();
 
-                // Formas aleatórias (retângulos e círculos)
-                if (Math.random() < 0.5) {
-                    ctx.fillRect(x, y, size, size);
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(x, y, size / 2, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
+            var nextColor = getNextColor(color);
+            var newSize = size * 0.75;
+
+            for (var i = 0; i < 5; i++) {
+                var newX = x + Math.cos(i * Math.PI / 2) * newSize;
+                var newY = y + Math.sin(i * Math.PI / 2) * newSize;
+                drawShape(newX, newY, newSize, depth - 1, nextColor);
             }
         }
 
-        // Chamar a função para gerar arte ao carregar a página
+        function getNextColor(color) {
+            var newColor = [
+                (color[0] + Math.floor(Math.random() * 50)) % 256,
+                (color[1] + Math.floor(Math.random() * 50)) % 256,
+                (color[2] + Math.floor(Math.random() * 50)) % 256
+            ];
+            return newColor;
+        }
+
         generateArt();
     </script>
 </body>

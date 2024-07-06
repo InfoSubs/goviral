@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Fibonacci Math Art Generator</title>
+    <title>Fractal Fibonacci Art Generator</title>
     <style>
         body {
             display: flex;
@@ -17,56 +17,52 @@
         canvas {
             border: 1px solid #ccc;
         }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
+    <h1>Fractal Fibonacci Art Generator</h1>
     <canvas id="artCanvas" width="800" height="600"></canvas>
-    <button onclick="gerarObraDeArte()">Gerar Nova Obra de Arte</button>
 
     <script>
-        // Função para gerar uma obra de arte com base em Fibonacci
-        function gerarObraDeArte() {
-            var canvas = document.getElementById('artCanvas');
-            var ctx = canvas.getContext('2d');
+        // Lógica para gerar arte abstrata
+        var canvas = document.getElementById('artCanvas');
+        var ctx = canvas.getContext('2d');
 
-            // Limpar o canvas
+        function generateArt() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Lógica para desenhar a obra de arte usando Fibonacci
-            var fib = [1, 1];
-            var maxSize = Math.min(canvas.width, canvas.height) * 0.8;
+            // Configurações iniciais
+            var numShapes = 50;
+            var maxSize = 100;
+            var minSize = 20;
 
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, canvas.height / 2);
+            for (var i = 0; i < numShapes; i++) {
+                // Cores aleatórias
+                var red = Math.floor(Math.random() * 256);
+                var green = Math.floor(Math.random() * 256);
+                var blue = Math.floor(Math.random() * 256);
+                ctx.fillStyle = `rgb(${red},${green},${blue})`;
 
-            for (var i = 0; i < 200; i++) {
-                var next = fib[0] + fib[1];
-                var angle = i * Math.PI / 180 * 137.5; // Espiral de Fibonacci
+                // Posições aleatórias
+                var x = Math.random() * canvas.width;
+                var y = Math.random() * canvas.height;
 
-                var x = canvas.width / 2 + Math.cos(angle) * next * 2;
-                var y = canvas.height / 2 + Math.sin(angle) * next * 2;
+                // Tamanhos aleatórios
+                var size = Math.random() * (maxSize - minSize) + minSize;
 
-                ctx.lineTo(x, y);
-
-                fib[0] = fib[1];
-                fib[1] = next;
+                // Formas aleatórias (retângulos e círculos)
+                if (Math.random() < 0.5) {
+                    ctx.fillRect(x, y, size, size);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(x, y, size / 2, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
             }
-
-            ctx.strokeStyle = '#000';
-            ctx.stroke();
         }
+
+        // Chamar a função para gerar arte ao carregar a página
+        generateArt();
     </script>
 </body>
 </html>

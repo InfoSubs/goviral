@@ -12,6 +12,7 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            transition: background-color 1s ease;
         }
         button {
             padding: 15px 30px;
@@ -20,59 +21,52 @@
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
-        #experiencia-unica {
+        .random-element {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: rgba(0, 123, 255, 0.8);
-            color: white;
-            font-size: 1.5rem;
-            border-radius: 10px;
-            z-index: 1000;
-            animation: fadeInOut 2s ease-out;
-        }
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            transition: all 0.5s ease;
         }
     </style>
 </head>
 <body>
     <button onclick="gerarExperienciaUnica()">Descobrir Experiência Única</button>
 
-    <div id="experiencia-unica"></div>
-
     <script>
         function gerarExperienciaUnica() {
-            // Array de possíveis efeitos visuais
-            var efeitos = [
-                '<img src="https://via.placeholder.com/300">',
-                '<h2>Parabéns! Você encontrou uma experiência única!</h2>',
-                '<div style="width: 200px; height: 200px; background-color: yellow; border-radius: 50%;"></div>'
-                // Adicione outros efeitos visuais aqui
-            ];
+            // Gerar cor aleatória
+            var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+            
+            // Alterar cor de fundo do body
+            document.body.style.backgroundColor = randomColor;
 
-            // Escolher aleatoriamente um efeito do array
-            var randomIndex = Math.floor(Math.random() * efeitos.length);
-            var efeito = efeitos[randomIndex];
+            // Criar elemento visual aleatório
+            var randomElement = document.createElement('div');
+            randomElement.className = 'random-element';
+            randomElement.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+            randomElement.style.top = Math.random() * (window.innerHeight - 50) + 'px';
 
-            // Exibir o efeito dentro da div experiência-única
-            var experienciaUnica = document.getElementById('experiencia-unica');
-            experienciaUnica.innerHTML = efeito;
-            experienciaUnica.style.display = 'block';
+            // Adicionar elemento ao body
+            document.body.appendChild(randomElement);
 
-            // Opcional: Remover o efeito após alguns segundos
+            // Animação do elemento visual
             setTimeout(function() {
-                experienciaUnica.style.display = 'none';
-            }, 3000); // Exemplo de 3 segundos, ajuste conforme necessário
+                randomElement.style.transform = 'scale(2) translate(-50%, -50%)';
+                randomElement.style.opacity = '0';
+            }, 100);
+
+            // Remover elemento após a animação
+            setTimeout(function() {
+                randomElement.remove();
+            }, 600);
         }
     </script>
 </body>

@@ -1,4 +1,4 @@
-# Projeto Startup Viral
+# Projeto Go Viral
 
 ## Descrição
 Este projeto é uma plataforma web inovadora projetada para oferecer uma experiência única e personalizada aos usuários. Utiliza um sistema de geração de conteúdo aleatório que proporciona uma experiência diferente para cada visita, incentivando os usuários a compartilharem em seus canais de mídia social.
